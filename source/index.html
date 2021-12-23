@@ -18,7 +18,7 @@
     </header>
     <section id="user-goal">
       <h2>My Course Goal</h2>
-      <p>{{outputGoal()}}</p>
+      <p v-html="outputGoal()"></p>
 
       <p>Visit our <a v-bind:href="siteLink" target="_blank">site for  </a>more information</p>
     </section>

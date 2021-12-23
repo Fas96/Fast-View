@@ -4,8 +4,8 @@ const app=new Vue({
     data(){
         return {
             courseGoal: 'Finish this course on time',
-            goalOne: 'Fas is learning well\n',
-            goalTwo: 'This could be a new break through\n',
+            goalOne: '<h1>Basics of vue js </h1>',
+            goalTwo: '<h1>This could be a new break through <h1>',
             siteLink: 'http://fasgh.govt.kr/'
         }
     },

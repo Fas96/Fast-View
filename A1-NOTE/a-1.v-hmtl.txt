@@ -1,0 +1,11 @@
+Outputting Raw HTML Content with v-html
+
+outputting html tags.
+vue outputs the raw  html values
+
+1. v-html
+
+v-html binds an html code to a tag and removes the html tags around it. else if vue inputs the raw value in {{}} it returns
+the raw values
+
+<p v-html="outputGoal()"></p>
