@@ -1,0 +1,7 @@
+Events & Methods
+
+methods could be declared and the needed event could be binded it.
+
+events can be bound like this.
+
+v-on: EVENTTOBESPECIFIED

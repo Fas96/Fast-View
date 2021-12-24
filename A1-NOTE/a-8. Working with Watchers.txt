@@ -1,0 +1,4 @@
+Working with Watchers
+
+A watcher is basically a function u can tell vue to execute
+when one of its dependencies change

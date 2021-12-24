@@ -33,11 +33,27 @@
         <div>
             <section id="events">
                 <h2>Events in Action</h2>
-                <button v-on:click="counter++">Add</button>
-                <button v-on:click="counter--">Remove</button>
-                <p>Result: {{counter}}</p>
+                <input type="text" v-model="username">
+                <button v-on:click="resetUserName">Reset</button><p>Your name: {{fullname}}</p>
+                <hr>
+                <button v-on:click="addBtn()">Add</button>
+                <button v-on:click="removeBtn()">Remove</button>
+                <p>Number  <input type="number" v-on:input="addNumber($event)"></p>
+<!--                <p v-once>Result: {{counter}}</p>-->
+                <p >Result: {{counter}}</p>
             </section>
+        </div>
 
+        <div id="userForm">
+            <section id="userDataForm">
+                <form v-on:submit.prevent="submitUserData" v-on:keydown.shift="submitOnShift">
+                    <input type="text" id="name">
+                    <input type="password" id="password">
+                    <button>Sign up</button>
+                </form>
+
+            </section>
         </div>
     </body>
+
 </html>

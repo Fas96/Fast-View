@@ -1,0 +1,9 @@
+Exploring Event Modifiers
+
+v-once
+  <p v-once>Result: {{counter}}</p>
+this makes the page count to update only one-time
+-----------------------------------------------------------------------------
+allows an entity or variable to modify only once when the page loads and does
+not allow any further changes. so changes occurs only once when the page loads
+------------------------------------------------------------------------------

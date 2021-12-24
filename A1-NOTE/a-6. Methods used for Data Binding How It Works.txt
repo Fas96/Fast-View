@@ -1,0 +1,17 @@
+Methods used for Data Binding How It Works
+
+DOM interaction
+
+templates and data binding--event handling
+
+--------------------------------------------------------
+Advanced reactivity in vue-js
+--------------------------------------------------------
+
+methods- using them with event and better alternative.
+
+
+
+vue-calls methods through the page anytime an event occurs.
+so vue provides a better option to stop events or methods from being loaded each time a page is or event occurs but
+specific methods or events are called.

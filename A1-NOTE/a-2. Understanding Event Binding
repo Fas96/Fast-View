@@ -1,0 +1,23 @@
+Understanding Event Binding
+
+v-on:_________specific event could be specified
+---------------------------------------------------------------
+            <section id="events">
+                <h2>Events in Action</h2>
+                <button v-on:click="counter++">Add</button>
+                <button v-on:click="counter--">Remove</button>
+                <p>Result: {{counter}}</p>
+            </section>
+---------------------------------------------------------------
+method could be declared for a specific even
+
+methods: {
+        // addBtn(){
+        //     this.counter+=1
+        // },
+        // removeBtn(){
+        //     this.counter-=1
+        // }
+    }
+
+

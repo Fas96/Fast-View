@@ -1,0 +1,12 @@
+ Data Binding Event Binding = Two-Way Binding
+
+  <input type="text" v-model="username">
+
+  v-model is two way data binding for an input.
+
+  when we use it on an input we can get rid of
+  -------------------------------------------------------------------
+  v-on:input="field_specified"
+  v-bind:value="field_specified"
+  -------------------------------------------------------------------
+  we can easily control the value binding and the input

@@ -1,0 +1,11 @@
+ Introducing Computed Properties
+
+
+ ------------------------------
+ are eseentialy methods with one important
+ difference.
+ vue would aware of their dependency and only execute when we
+
+
+ ----------------------------------------
+ computed properties are better used for outputting properties
