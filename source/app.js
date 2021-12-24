@@ -55,14 +55,37 @@ const events = new Vue({
             if(latestVal===''){
                 this.fullname=''
             }else {this.fullname=latestVal+' '+'fas';}
+        },
+        // this watch resets the counter values limits
+        counter(latestval){
+
+            if(latestval>100){
+                this.create();
+                console.log("--------------test-----------")
+                const that=this;
+                //setting time or posting when the count variable exceeds some limits
+                setTimeout(function () {
+                    that.counter=0
+                },2000)
+                // this.counter=0;
+                 alert("-------shining watcher---the can be used to post-----------")
+            }
         }
     },
     computed: {
-        fullname() {
+        fullnames() {
             return this.username;
         }
     },
     methods: {
+        async create(){
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }};
+            const response = await fetch("https://api.coinbase.com/v2/currencies" );
+            const data = await response.json();
+            console.log(JSON.stringify(data))
+        },
         resetUserName() {
             this.username = ''
         },

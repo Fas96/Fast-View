@@ -1,0 +1,26 @@
+Methods vs Computed Properties vs Watchers
+
+methods
+--------------------------------------------
+1. Use with event binding or data binding
+2. Data binding: method is executed for every
+"renderer" cycle of the component.
+3. Use for events or data that really needs
+to be reevaluated all the time.
+--------------------------------------------
+
+computed
+--------------------------------------------
+1. use with data binding
+2. computed properties are only re-evaluated
+if one of their 'used values' changed.
+3. Use for data that depends on other data.
+--------------------------------------------
+
+watch
+--------------------------------------------
+1. not used directly in template
+2. Allows you to run any code in reaction
+to some changes data (e.g. send Http request etc.)
+3. Use for any non-data update you want to make.
+--------------------------------------------
