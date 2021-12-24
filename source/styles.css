@@ -192,3 +192,25 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
+.dstyling {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem auto;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  width: 90%;
+  max-width: 40rem;
+
+}
+.demo{
+  margin: 3rem auto;
+  border-radius: 4px;
+  padding: 3rem;
+  border: 2px dotted black;
+  text-align: center;
+  width: 70%;
+  max-width: 40rem;
+  height: 80%;
+  max-height: 40px;
+
+}

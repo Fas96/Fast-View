@@ -1,0 +1,10 @@
+v-bind and v-on Shorthands
+-----------------------------
+v-on: == @
+v-bind == :
+
+Note:
+There is no v-model shorthand
+
+
+------------------------------

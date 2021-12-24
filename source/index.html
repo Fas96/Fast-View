@@ -21,12 +21,12 @@
             <!--      <p v-html="outputGoal()"></p>-->
             <p>{{outputGoal()}}</p>
 
-            <p>Visit our <a v-bind:href="siteLink" target="_blank">site for </a>more information</p>
+            <p>Visit our <a :href="siteLink" target="_blank">site for </a>more information</p>
         </section>
         <div id="app-7">
             <section id="user-goal">
                 <ul>
-                    <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+                    <todo-item v-for="item in groceryList" :todo="item" :key="item.id"></todo-item>
                 </ul>
             </section>
         </div>
@@ -46,7 +46,7 @@
 
         <div id="userForm">
             <section id="userDataForm">
-                <form v-on:submit.prevent="submitUserData" v-on:keydown.shift="submitOnShift">
+                <form @submit.prevent="submitUserData" @keydown.shift="submitOnShift">
                     <input type="text" id="name">
                     <input type="password" id="password" autocomplete="on">
                     <button>Sign up</button>

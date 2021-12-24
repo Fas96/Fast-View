@@ -51,24 +51,26 @@ const events = new Vue({
         }
     },
     watch: {
-        username(latestVal){
-            if(latestVal===''){
-                this.fullname=''
-            }else {this.fullname=latestVal+' '+'fas';}
+        username(latestVal) {
+            if (latestVal === '') {
+                this.fullname = ''
+            } else {
+                this.fullname = latestVal + ' ' + 'fas';
+            }
         },
         // this watch resets the counter values limits
-        counter(latestval){
+        counter(latestval) {
 
-            if(latestval>100){
+            if (latestval > 100) {
                 this.create();
                 console.log("--------------test-----------")
-                const that=this;
+                const that = this;
                 //setting time or posting when the count variable exceeds some limits
                 setTimeout(function () {
-                    that.counter=0
-                },2000)
+                    that.counter = 0
+                }, 2000)
                 // this.counter=0;
-                 alert("-------shining watcher---the can be used to post-----------")
+                alert("-------shining watcher---the can be used to post-----------")
             }
         }
     },
@@ -78,11 +80,12 @@ const events = new Vue({
         }
     },
     methods: {
-        async create(){
+        async create() {
             const requestOptions = {
                 method: "POST",
-                headers: { "Content-Type": "application/json" }};
-            const response = await fetch("https://api.coinbase.com/v2/currencies" );
+                headers: {"Content-Type": "application/json"}
+            };
+            const response = await fetch("https://api.coinbase.com/v2/currencies");
             const data = await response.json();
             console.log(JSON.stringify(data))
         },
@@ -141,6 +144,34 @@ const userDataForm = new Vue({
         },
         submitOnShift(event) {
             alert("shit key called", event.key)
+        }
+    }
+})
+
+const dstyling = new Vue({
+    el: '#dstyling',
+    data() {
+        return {
+            boxAselected: false,
+            boxBselected: false,
+            boxCselected: false
+        };
+    },
+    methods: {
+        boxselected(box) {
+            if (box === 'A') {
+                this.boxAselected = true;
+                this.boxBselected = false;
+                this.boxCselected = false;
+            } else if (box === 'B') {
+                this.boxBselected = true;
+                this.boxAselected = false;
+                this.boxCselected = false;
+            } else if (box === 'C') {
+                this.boxCselected = true;
+                this.boxAselected = false;
+                this.boxBselected = false;
+            }
         }
     }
 })
