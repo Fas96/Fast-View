@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue Basics</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="app.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <h1>Vue Course Goals</h1>
-    </header>
-    <section id="user-goal">
-      <h2>My Course Goal</h2>
-      <p v-html="outputGoal()"></p>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Vue Basics</title>
+        <link
+                href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+                rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>4-years Goals</h1>
+        </header>
+        <section id="user-goal">
+            <h2>Declarative Course Goal</h2>
+            <!--      <p v-html="outputGoal()"></p>-->
+            <p>{{outputGoal()}}</p>
 
-      <p>Visit our <a v-bind:href="siteLink" target="_blank">site for  </a>more information</p>
-    </section>
-    <div id="app-7">
-      <section id="user-goal">
-      <ul>
-        <todo-item  v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id" ></todo-item>
-      </ul>
-      </section>
-    </div>
-  </body>
+            <p>Visit our <a v-bind:href="siteLink" target="_blank">site for </a>more information</p>
+        </section>
+        <div id="app-7">
+            <section id="user-goal">
+                <ul>
+                    <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+                </ul>
+            </section>
+        </div>
+        <div>
+            <section id="events">
+                <h2>Events in Action</h2>
+                <button v-on:click="counter++">Add</button>
+                <button v-on:click="counter--">Remove</button>
+                <p>Result: {{counter}}</p>
+            </section>
+
+        </div>
+    </body>
 </html>

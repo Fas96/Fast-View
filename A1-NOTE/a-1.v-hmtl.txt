@@ -9,3 +9,6 @@ v-html binds an html code to a tag and removes the html tags around it. else if 
 the raw values
 
 <p v-html="outputGoal()"></p>
+
+
+vue uses a declarative approach.

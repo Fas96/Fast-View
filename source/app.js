@@ -4,8 +4,8 @@ const app=new Vue({
     data(){
         return {
             courseGoal: 'Finish this course on time',
-            goalOne: '<h1>Basics of vue js </h1>',
-            goalTwo: '<h1>This could be a new break through <h1>',
+            goalOne: 'Basics of a framework js </h1>',
+            goalTwo: 'This could be a new break through ',
             siteLink: 'http://fasgh.govt.kr/'
         }
     },
@@ -34,5 +34,23 @@ var app7 = new Vue({
             { id: 1, text: 'Cheese' },
             { id: 2, text: 'Whatever else humans are supposed to eat' }
         ]
+    }
+})
+
+
+const events = new Vue({
+    el: '#events',
+    data() {
+        return {
+            counter: Math.ceil(Math.random()*100 )
+        }
+    },
+    methods: {
+        // addBtn(){
+        //     this.counter+=1
+        // },
+        // removeBtn(){
+        //     this.counter-=1
+        // }
     }
 })
