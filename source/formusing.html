@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ajax complete</title>
+
+  </head>
+  <body>
+    <form action="	https://api.coinbase.com/v2/currencies" id="searchForm">
+      <input type="text" name="s" placeholder="Search...">
+      <input type="submit" value="Search">
+    </form>
+    <!-- the result of the search will be rendered inside this div -->
+    <div id="result"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jaxcom.js" prefer></script>
+    <script>
+      $( "#result" ).load( "index.html #events" );
+      $( "#searchForm" ).submit(function( event ) {
+
+        // Stop form from submitting normally
+        event.preventDefault();
+
+        // Get some values from elements on the page:
+        var $form = $( this ),  term = $form.find( "input[name='s']" ).val(),  url = $form.attr( "action" );
+
+
+        var posting = $.post( url, { s: term } );
+        alert(posting)
+
+        // Put the results in a div
+        posting.done(function( data ) {
+          var content = $( data ).find( "#content" );
+          $( "#result" ).empty().append( content );
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -157,6 +157,7 @@ const dstyling = new Vue({
             boxCselected: false
         };
     },
+
     methods: {
         boxselected(box) {
             if (box === 'A') {

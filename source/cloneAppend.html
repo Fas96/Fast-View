@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ajax complete</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="name">
+      <div class="hello">Hello</div>
+      <div class="goodbye">Goodbye</div>
+
+    </div>
+    <hr>
+    <p><b>Results:</b> <span id="results"></span></p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jaxcom.js" prefer></script>
+    <script>
+      // $( ".container" ).clone().appendTo( ".goodbye" );
+      $( "#name" ).clone().appendTo( ".goodbye" );
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ajax complete</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="name">
+      <div class="hello">Hello</div>
+      <div class="goodbye">Goodbye</div>
+
+    </div>
+    <hr>
+    <p><b>Results:</b> <span id="results"></span></p>
+
+    <div id="images"></div>
+    <ul>
+      <li>list item 1</li>
+      <li>list item 2</li>
+      <li>list item 3</li>
+      <li>list item 4</li>
+      <li>list item 5</li>
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jaxcom.js" prefer></script>
+    <script>
+      // $( ".container" ).clone().appendTo( ".goodbye" );
+      $( "#name" ).clone().appendTo( ".goodbye" );
+      $.getJSON( "test.json", function( data ) {
+        var items = [];
+        $.each( data, function( key, val ) {
+          items.push( "<li id='" + key + "'>" + val + "</li>" );
+        });
+
+        $( "<ul/>", {
+          "class": "my-new-list",
+          html: items.join( "" )
+        }).appendTo( "body" );
+      });
+
+      (function() {
+        var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+        $.getJSON( flickerAPI, { tags: "mount rainier", tagmode: "any", format: "json"  })
+                .done(function( data ) {
+                  $.each( data.items, function( i, item ) {
+                    $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+                    if ( i === 5 ) {
+                      return false;
+                    }
+                  });
+                });
+      })();
+
+// even css
+      $( "li" ).even().css( "background-color", "red" );
+      $( "li" ).odd().css( "background-color", "blue" );
+    </script>
+  </body>
+</html>
