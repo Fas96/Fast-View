@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" >
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"  ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"  ></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="container-md">
+        <form id="aiqMlshDetail" name="aiqMlshDetail" action="/aiq/mlsh3/selectAIQMlshList.do" method="post">
+            <input type="hidden" name="searchType" value="DETAIL">
+
+            <div class="search_cond hidden">
+                <table>
+                     
+                    <tbody id="tbl_search_cond">
+                        <tr>
+
+                            <td id="detail_search_gbn">
+                                <div class="text">논증구조</div>
+                                <div class="mt10" id="sel_tag_gbn1_0">
+                                    <select title="" name="selTagGbn1" class="sort_numsel sel_tag_gbn1" style="width:100%; height: 40px;">
+                                        <option value="all" selected="selected">전체</option>
+                                    </select>
+                                </div>
+                                <div class="mt10" id="sel_tag_gbn1_1">
+                                    <select title="" name="selTagGbn1" class="sort_numsel sel_tag_gbn1" style="width:100%; height: 40px;">
+                                        <option value="all" selected="selected">전체</option>
+                                    </select>
+                                </div>
+                                <div class="mt10" id="sel_tag_gbn1_2">
+                                    <select title="all" name="selTagGbn1" class="sort_numsel sel_tag_gbn1" style="width:100%; height: 40px;">
+                                        <option value="" selected="selected">전체</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td id="detail_search_tag">
+                                <div class="text">의미태그 선택</div>
+                                <div class="mt10" id="sel_tag_gbn2_0">
+                                    <select title="" name="selTagGbn2" class="sort_numsel sel_tag_gbn2" style="width:100%; height: 40px;">
+                                        <option value="all" selected="selected">전체</option>
+                                    </select>
+                                </div>
+                                <div class="mt10" id="sel_tag_gbn2_1">
+                                    <select title="" name="selTagGbn2" class="sort_numsel sel_tag_gbn2" style="width:100%; height: 40px;">
+                                        <option value="all" selected="selected">전체</option>
+                                    </select>
+                                </div>
+                                <div class="mt10" id="sel_tag_gbn2_2">
+                                    <select title="" name="selTagGbn2" class="sort_numsel sel_tag_gbn3" style="width:100%; height: 40px;">
+                                        <option value="all" selected="selected">전체</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td id="detail_search_txt">
+                                <div class="text">키워드 입력</div>
+                                <div class="mt10">
+                                    <input id="" type="text" name="dkeyword" title="검색어" style="width: 480px; vertical-align: middle;">
+                                    <select title="" name="dandor" class="sort_numsel" style="width: 120px; height: 40px;">
+                                        <option value="AND" selected="selected">AND</option>
+                                        <option value="OR">OR</option>
+                                    </select>
+                                </div>
+                                <div class="mt10">
+                                    <input id="" type="text" name="dkeyword" title="검색어" style="width: 480px; vertical-align: middle;">
+                                    <select title="" name="dandor" class="sort_numsel" style="width: 120px; height: 40px;">
+                                        <option value="AND" selected="selected">AND</option>
+                                        <option value="OR">OR</option>
+                                    </select>
+                                </div>
+                                <div class="mt10">
+                                    <input id="" type="text" name="dkeyword" title="검색어" style="width: 480px; vertical-align: middle;">
+                                    <button type="button" onclick="addRow(this);" id="addBtn" style="width: 120px; vertical-align: middle;">한줄추가</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="p_btn_wrap">
+                    <button type="button" class="btn middle btn_blue submit_id_executute" onClick="fn_mlshDetail();submit_id_executute()">실행</button>
+                </div>
+            </div>
+        </form>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            var tagGbnList = [
+                {"id":"10", "val":"연구주제"},
+                {"id":"20", "val":"연구방법"},
+                {"id":"30", "val":"연구결과"}
+            ];
+
+            var tagList = [
+                [{"id":"11", "val":"문제정의"},{"id":"12", "val":"가설설정"}],
+                [{"id":"21", "val":"대상데이터"},{"id":"22", "val":"데이터처리"},{"id":"23", "val":"제안방법"},{"id":"24", "val":"이론/모형"}],
+                [{"id":"31", "val":"성능/효과"},{"id":"32", "val":"후속연구"}]
+            ];
+
+            $(document).ready(function() {
+
+                //화살표 클릭
+                $('.openclosebox').click(function() {
+                    var div_item = $(this).parent().parent().parent('.result_item');
+                    div_item.toggleClass('open');
+
+                    var idx = div_item.attr("attridx");
+
+                    if(div_item.is(".open")) {
+                        $('#tag_full_'+idx).show();
+                        $('#tag_summary_'+idx).hide();
+                        insertBhvrLog(
+                            {
+                                'cn': $(div_item).prev('input[name="cn"]').val()
+                                ,'sourceId':''
+                                ,'bhvrNo': '5'
+                                ,'param' : ''
+                            }
+                        );
+                    } else {
+                        $('#tag_full_'+idx).hide();
+                        $('#tag_summary_'+idx).show();
+                    }
+                });
+
+                $('.mmngbtn').click(function(e){
+                    var tagCd = $(this).attr('tagcd');
+                    var cn = $(this).attr('cn');
+                    var rnum = $(this).attr('rnum');
+                    var eId = $(this).attr('eid');
+                    var tagId = $(this).attr('tagId');
+                    var text = $("#"+eId).html();
+                    var tagGbnName = "";
+                    var tagCdName = "";
+
+                    for(var i1=0;i1<tagList.length;i1++)  {
+                        var tagGbn = tagList[i1];
+                        var found = false;
+
+                        for(var i2=0;i2<tagGbn.length;i2++) {
+                            var cd = tagGbn[i2];
+
+                            if(cd.id == tagCd) {
+                                found = true;
+                                tagGbnName = tagGbnList[i1].val;
+                                tagCdName = cd.val;
+                                break;
+                            }
+                        }
+                        if(found) break;
+                    }
+
+                    var mvY = (10 + $(window).scrollTop()) + "px";
+                    var mvX = Math.max(0, (($(window).width() - 1150) / 2) + $(window).scrollLeft()) + "px";
+
+                    $.ajax({
+                        url: "/aiq/mlsh3/searchMmngTag.do",
+                        type: 'post',
+                        data: {tagId:tagId, cn:cn, tagCd: tagCd, sentence:text},
+                        dataType: 'html',
+                        success: function(data){
+                            $("#comp_sentence").html(text);
+                            $("#comp_tag_gbn").html(tagGbnName);
+                            $("#comp_tag_cd").html(tagCdName);
+                            $("#comp_author").html($("#art_author_"+rnum).html());
+                            $("#comp_art_title").html($("#art_title_"+rnum).html());
+
+                            // parsing json string to fit the layout
+                            var datas=data.replaceAll("br","<");
+                            var datadd=datas.replaceAll("<dd>","<p class=\"guidebox\">");
+                            var dataddd=datadd.replaceAll("</dd>","</p>");
+                            var datam=dataddd.replaceAll("similar_list","similar_con").replaceAll("dt","h4");
+
+                            var replaceAll_dl=datam.replaceAll(/<dl(.)+>$/gi,"")
+                            var replaceAll_h4=replaceAll_dl.replaceAll(/<h4>(.){6}<\/h4>/gi,"")
+                            var replaceAll_dl_dl=replaceAll_h4.replaceAll(/<dl(.){11}>/gi,"")
+                            var replaceAll_p=replaceAll_dl_dl.replaceAll(/<p(.){22}>/gi,"")
+                            var replaceAll_p_S=replaceAll_p.replaceAll(/<p(.){17}>/gi,"")
+                            var replace_P_Empty=replaceAll_p_S.replaceAll(/<p><\/p>/gi,"")
+                            var addClass_high_lighter=replace_P_Empty.replaceAll(/<\/h4>/gi,"</h4> <p class=\"guidebox\">")
+                            console.log(addClass_high_lighter)
+                            $("#wrap_mmng").html(addClass_high_lighter);
+
+                            $(".Pstyle3").css({left:mvX, top:mvY});
+                            $("#modal").show();
+                        }
+                    });
+                });
+
+                for(var i=0;i<3;i++) {
+                    var sel = $("#detail_search_gbn").find("select").eq(i);
+                    for(var j=0;j<tagGbnList.length;j++) {
+                        if(j==(i-1))
+                            sel.append("<option value='"+tagGbnList[j].id+"' selected='selected'>"+tagGbnList[j].val+"</option>");
+                        else
+                            sel.append("<option value='"+tagGbnList[j].id+"'>"+tagGbnList[j].val+"</option>");
+                    }
+
+                    if(i != 0) {
+                        setOptions(i, i);
+                    }
+                }
+
+                $('.sel_tag_gbn1').change(function() {
+                    changeTagGbn(this);
+                });
+
+                $.ajax({
+                    url: "/aiq/mlsh3/selectSubjectList.do",
+                    type: 'post',
+                    dataType: 'json',
+                    success: function(data){
+                        for(var i=0;i<data.length;i++) {
+                            var docCount = numberWithCommas(data[i].docCount);
+                            var html = '<span class="col_p_50"><label class="ml10 mr10"><input type="checkbox" onClick="clickDdsVal()" name="conddc" class="searchDdsVal" value="'+data[i].name+'">'+data[i].label+'('+docCount+')</label></span>';
+                            $("#div_detail_dds_list").append(html);
+                        }
+                    }
+                });
+
+                $("#modal").detach().appendTo("body");
+
+
+
+                const formId="aiqMlshDetail"
+                const url='/aiq/mlsh3/selectAIQMlshList.do'
+
+                const  detailFormIdentifier= ` `;
+
+                let form = document.getElementById(formId);
+
+                let detailFormElements=form.elements;
+
+                const populateForm = () => {
+                    if (localStorage.key(detailFormIdentifier)) {
+                        const savedData = JSON.parse(localStorage.getItem(detailFormIdentifier));
+                        for (const element of detailFormElements) {
+                            if (element.name in savedData) {
+                                element.value = savedData[element.name];
+                            }
+                        }
+
+                    }
+                    // alert("Form has been refilled with saved data!");
+                };
+
+
+                populateForm()
+
+
+
+            });
+
+            function submit_id_executute() {
+                const formId="aiqMlshDetail"
+                const url='/aiq/mlsh3/selectAIQMlshList.do'
+                console.log("innnnnnnnnnnnnnnnnnn")
+                // const saveBtn=$(".submit_id_executute")
+                const  detailFormIdentifier= ` `;
+                console.log(detailFormIdentifier)
+                let form = document.getElementById(formId);
+                // let form=$("#aiqMlshDetail");
+
+                let detailFormElements=form.elements;
+                // getting form data
+                const getFormData = () => {
+                    // let dataArray={};
+                    let count=0;
+                    let data = { [detailFormIdentifier]: {} };
+                    let dataArray = { [detailFormIdentifier]: {} };
+                    for (const element of detailFormElements) {
+                        console.log(":::::::::::::::::::::::::::::::::::::::::::")
+
+                        console.log(element)
+                        if (element.name.length > 0) {
+                            if(count%4===0){
+                                dataArray[count]=data;
+                                this.data={}
+                            }
+                            count+=1
+                            data[detailFormIdentifier][element.name] = element.value;
+                            console.log(element.name+""+element.value);
+
+                        }
+                    }
+
+                    console.log(data)
+                    console.log(count)
+                    console.log(dataArray)
+                    console.log(":::::::::::::::::::::::::::::::::::::::::::")
+                    return dataArray;
+                };
+
+                let data = getFormData();
+
+                localStorage.setItem(detailFormIdentifier, JSON.stringify(data[detailFormIdentifier]));
+
+
+
+                console.log(":::::::::::::::::::::::::::;")
+                // document.onload=populateForm();
+                console.log(":::::::::::::::::::::::::::;")
+
+
+
+            }
+
+            function clickDdsVal() {
+                var hasChecked = false;
+                var ddsVals = $(".searchDdsVal");
+
+                for(var i=0;i<ddsVals.length;i++) {
+                    if($(ddsVals[i]).is(":checked")) {
+                        hasChecked = true;
+                        break;
+                    }
+                }
+                if(hasChecked) $( ".searchDdsAll" ).prop( "checked", false);
+            }
+
+            function clickDdsAll() {
+                if($(".searchDdsAll").is(":checked")) {
+                    var ddsVals = $(".searchDdsVal");
+
+                    for(var i=0;i<ddsVals.length;i++) {
+                        if($(ddsVals[i]).is(":checked")) {
+                            $( ddsVals[i] ).prop( "checked", false);
+                        }
+                    }
+                }
+            }
+
+            function changeTagGbn(obj) {
+                var id = $(obj).parent().attr('id');
+                var idx = parseInt(id.substring(id.lastIndexOf("_")+1));
+
+                var gbnIdx = obj.selectedIndex;
+                if(gbnIdx==0) return;
+
+                gbnIdx = gbnIdx-1;
+
+                setOptions(gbnIdx, idx);
+            }
+
+            function setOptions(gbnIdx, idx) {
+                var sel = $("#sel_tag_gbn2_"+idx).find("select");
+
+                $("#sel_tag_gbn2_"+idx).find("select").find("option").slice(1).remove();
+
+                var tags = tagList[gbnIdx];
+                for(var j=0;j<tags.length;j++) {
+                    sel.append("<option value='"+tags[j].id+"'>"+tags[j].val+"</option>");
+                }
+            }
+
+            function clickTagGbn(id,idx) {
+                if(id==20) {
+                    $("#tag_btn_20_"+idx).addClass("on");
+                    $("#tag_btn_10_"+idx).removeClass("on");
+                    $("#tag_btn_30_"+idx).removeClass("on");
+
+                    $("#tag_gbn_20_"+idx).show();
+                    $("#tag_gbn_10_"+idx).hide();
+                    $("#tag_gbn_30_"+idx).hide();
+                } else if(id==30) {
+                    $("#tag_btn_30_"+idx).addClass("on");
+                    $("#tag_btn_10_"+idx).removeClass("on");
+                    $("#tag_btn_20_"+idx).removeClass("on");
+
+                    $("#tag_gbn_30_"+idx).show();
+                    $("#tag_gbn_10_"+idx).hide();
+                    $("#tag_gbn_20_"+idx).hide();
+                } else {
+                    $("#tag_btn_10_"+idx).addClass("on");
+                    $("#tag_btn_20_"+idx).removeClass("on");
+                    $("#tag_btn_30_"+idx).removeClass("on");
+
+                    $("#tag_gbn_10_"+idx).show();
+                    $("#tag_gbn_20_"+idx).hide();
+                    $("#tag_gbn_30_"+idx).hide();
+                }
+            }
+
+            //초록보기
+            function fn_showAbst(num) {
+                if ($('#greenData' + (num) + '').hasClass('hidden')) {
+
+                    $('#greenData' + (num) + '').attr('class', 'item_content');
+                    $('.greenBtn:eq(' + (num) + ')').attr('class',
+                        'greenBtn arrow_down on');
+                } else {
+                    $('.greenBtn:eq(' + (num) + ')').attr('class',
+                        'greenBtn arrow_down');
+                    $('#greenData' + (num) + '').attr('class', 'hidden');
+                }
+            }
+
+            function addRow(obj){
+                var len = $("#detail_search_gbn").find("div").length;
+                var idx = len - 2;
+                var rowHtml = $("#detail_search_gbn").find("div").eq(1).clone().html();
+                $("#detail_search_gbn").find("div").eq(idx).after("<div class='mt10' id='sel_tag_gbn1_"+(idx+1)+"'>" + rowHtml + "</div>");
+
+                $("#sel_tag_gbn1_"+(idx+1)).find("select").change(function() {
+                    changeTagGbn(this);
+                });
+
+                rowHtml = $("#detail_search_tag").find("div").eq(1).clone().html();
+                $("#detail_search_tag").find("div").eq(idx).after("<div class='mt10' id='sel_tag_gbn2_"+(idx+1)+"'>" + rowHtml + "</div>");
+
+                rowHtml = $("#detail_search_txt").find("div").eq(1).clone().html();
+                $("#detail_search_txt").find("div").eq(idx).after("<div class='mt10'>" + rowHtml + "</div>");
+            }
+
+            /* 글 검색 */
+            function fn_mlshSearch() {
+                $('#aiqMlshTotal').attr('target',"_self");
+                $('#aiqMlshTotal').attr('action', "/aiq/mlsh3/selectAIQMlshList.do");
+                $('#aiqMlshTotal').submit();
+            }
+
+            function fn_mlshDetail() {
+                $('#aiqMlshDetail').attr('target',"_self");
+                $('#aiqMlshDetail').attr('action', "/aiq/mlsh3/selectAIQMlshList.do");
+                $('#aiqMlshDetail').submit();
+            }
+            /* pagination 페이지 링크 function */
+            function fn_pageing(pageNo) {
+                $('#aiqMlshFilter').attr('target',"_self");
+                $('#pageIndex').val(pageNo);
+                $('#aiqMlshFilter').attr('action', "/aiq/mlsh3/selectAIQMlshList.do");
+                $('#aiqMlshFilter').submit();
+            }
+            /* PDF 다운로드 */
+            function fn_pdf_down(cn,title) {
+                $('#cn').val(cn);
+                $('#title').val(title);
+                $('#aiqMlshTotal').attr('action',"/aiq/mlsh3/pdfview.do");
+                $('#aiqMlshTotal').attr('target',"_blank");
+                $('#aiqMlshTotal').submit();
+
+                insertBhvrLog(
+                    {
+                        'cn': cn
+                        ,'sourceId':''
+                        ,'bhvrNo': '4'
+                        ,'param' : ''
+                    }
+                );
+            }
+
+            function fn_pdf_view(cn, pageNum) {
+
+                url = "/aiq/mlsh3/aiqMlshPdfView.do";
+                $('#aiqMlshTotal').attr('target',"_blank");
+
+                $('#cn').val(cn);
+                $('#pdfPage').val(pageNum);
+                $('#aiqMlshTotal').attr('action', url);
+                $('#aiqMlshTotal').submit();
+            }
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+
+        </script>
+
+    </body>
+</html>

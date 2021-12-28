@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Page 1</title>
+    </head>
+
+    <body>
+        <h2>This page 1</h2>
+
+        <form action="/spage2.html" id="myForm" >
+            <input name="fullName" type="text" oninput="cacheInput(this)"><br>
+            <input name="address" type="text" oninput="cacheInput(this)"><br>
+            <input name="favoriteFood" type="text" oninput="cacheInput(this)"><br>
+
+            <input type="submit" value="submit">
+        </form>
+
+        <br>
+
+        <a href="/spage2.html">Go to page 2</a>
+    </body>
+    <script type="text/javascript">
+        function cacheInput(e) {
+            localStorage.setItem(e.attributes["name"].value, e.value)
+        }
+        window.onload = function () {
+            let form = document.getElementById("myForm");
+            let inputs = form.children;
+            for (let i = 0; i < inputs.length; i++) {
+                let el = inputs[i];
+                if (el.tagName.toLowerCase() != "input" || el.attributes["type"].value != "text") {
+                    continue
+                }
+                let cachedVal = localStorage.getItem(el.attributes["name"].value)
+                console.log(cachedVal)
+                if (cachedVal != null) {
+                    el.value = cachedVal;
+                }
+            }
+        }
+    </script>
+
+</html>
