@@ -14,6 +14,7 @@ var tagList = [
 ];
 
 
+
 for (var i = 0; i < 3; i++) {
     var sel = $("#detail_search_gbn").find("select").eq(i);
     for (var j = 0; j < tagGbnList.length; j++) {
@@ -62,8 +63,8 @@ const populateForm = () => {
     if (localStorage.key(detailFormIdentifier)) {
         const savedData = JSON.parse(localStorage.getItem(detailFormIdentifier));
         for (const element of detailFormElements) {
-            if (element.name in savedData) {
-                element.value = savedData[element.name];
+            if (element.id in savedData) {
+                element.value = savedData[element.id];
             }
         }
 
@@ -94,14 +95,14 @@ function submit_id_executute() {
         let checkTY=0
         for (const element of detailFormElements) {
             if (element.name.length > 0) {
-                data[detailFormIdentifier][element.name] = element.value;
+                data[detailFormIdentifier][element.id] = element.value;
 
                 if(checkTY%4===0){
                     count+=1
                 }
                 if(element.name!=='searchType'){
                 checkTY+=1}
-                console.log(element.name + "|||" + element.value);
+                console.log(element.id+""+element.name + "|||" + element.value);
 
             }
         }
@@ -173,11 +174,20 @@ function setOptions(gbnIdx, idx) {
     }
 }
 
+function countMyself() {
 
+    if ( typeof countMyself.counter == 'undefined' ) {
+
+        countMyself.counter = 3;
+    }
+    return ++countMyself.counter;
+}
 function addRow(obj) {
+    let idxx=countMyself();
     var len = $("#detail_search_gbn").find("div").length;
     var idx = len - 2;
     var rowHtml = $("#detail_search_gbn").find("div").eq(1).clone().html();
+    rowHtml=rowHtml.replace(/id=\"(.){2}\"/gm,"id="+idxx+'0'+"\"")
     $("#detail_search_gbn").find("div").eq(idx).after("<div class='mt10' id='sel_tag_gbn1_" + (idx + 1) + "'>" + rowHtml + "</div>");
 
     $("#sel_tag_gbn1_" + (idx + 1)).find("select").change(function () {
@@ -185,10 +195,19 @@ function addRow(obj) {
     });
 
     rowHtml = $("#detail_search_tag").find("div").eq(1).clone().html();
+    rowHtml=rowHtml.replace(/id=\"(.){2}\"/gm,"id="+idxx+'1'+"\"")
     $("#detail_search_tag").find("div").eq(idx).after("<div class='mt10' id='sel_tag_gbn2_" + (idx + 1) + "'>" + rowHtml + "</div>");
 
     rowHtml = $("#detail_search_txt").find("div").eq(1).clone().html();
+
+    rowHtml=rowHtml.replace(/id=\"(.){2}\"/,"id="+idxx+'2'+"\"")
+    rowHtml=rowHtml.replace(/id="(.)4"/,"id="+idxx+'3'+"\"")
     $("#detail_search_txt").find("div").eq(idx).after("<div class='mt10'>" + rowHtml + "</div>");
+
+    console.log(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+    console.log(idxx)
+    console.log(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+
 }
 
 /* 글 검색 */
