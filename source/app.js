@@ -1,3 +1,4 @@
+// Declarative Course Goal
 const app = new Vue({
     mode: 'history',
     el: '#user-goal',
@@ -6,6 +7,7 @@ const app = new Vue({
             courseGoal: 'Finish this course on time',
             goalOne: 'Basics of a framework js',
             goalTwo: 'This could be a new break through ',
+
             siteLink: 'http://fasgh.govt.kr/',
 
         }
@@ -15,9 +17,9 @@ const app = new Vue({
         outputGoal() {
             const randomNumber = Math.random();
             if (randomNumber < 0.5) {
-                return this.goalOne + (calcTime('Seoul', '+9'))
+                return this.goalOne + (calcTime('Ghana', '+0'))
             } else {
-                return this.goalTwo + (calcTime('Seoul', '+9'))
+                return this.goalTwo + (calcTime('Ghana', '+0'))
             }
         }
     }
@@ -31,6 +33,7 @@ Vue.component('todo-item', {
 var app7 = new Vue({
     el: '#app-7',
     data: {
+        goalhtml: '<h1>This could be a new break through</h1> ',
         groceryList: [
             {id: 0, text: 'Vegetables'},
             {id: 1, text: 'Cheese'},
@@ -76,7 +79,7 @@ const events = new Vue({
     },
     computed: {
         fullnames() {
-            return this.username;
+            return this.username
         }
     },
     methods: {
@@ -96,7 +99,7 @@ const events = new Vue({
             this.username = this.username + "firibu";
         },
         addNumber(event) {
-            console.log("add number was callled")
+            console.log(event)
             this.addValue = event.target.value;
         },
 
@@ -148,6 +151,7 @@ const userDataForm = new Vue({
     }
 })
 
+// dynamic styling
 const dstyling = new Vue({
     el: '#dstyling',
     data() {

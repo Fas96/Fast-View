@@ -24,20 +24,23 @@
             <p>Visit our <a :href="siteLink" target="_blank">site for </a>more information</p>
         </section>
         <div id="app-7">
+<!--            this id is given because of styling-->
             <section id="user-goal">
                 <ul>
                     <todo-item v-for="item in groceryList" :todo="item" :key="item.id"></todo-item>
                 </ul>
+                <p v-html="goalhtml"></p>
             </section>
         </div>
+<!--        events-->
         <div>
             <section id="events">
                 <h2>Events in Action</h2>
                 <input type="text" v-model="username">
                 <button v-on:click="resetUserName">Reset</button><p>Your name: {{fullnames}}</p>
                 <hr>
-                <button v-on:click="addBtn()">Add</button>
-                <button v-on:click="removeBtn()">Remove</button>
+                <button v-on:click="addBtn()">+</button>
+                <button v-on:click="removeBtn()">-</button>
                 <p>Number  <input type="number" v-on:input="addNumber($event)"></p>
 <!--                <p v-once>Result: {{counter}}</p>-->
                 <p >Result: {{counter}}</p>
