@@ -50,7 +50,7 @@ const events = new Vue({
             counter: Math.ceil(Math.random() * 100),
             username: '',
             addValue: 0,
-            fullname: ''
+            fullname: '',
         }
     },
     watch: {
@@ -96,10 +96,10 @@ const events = new Vue({
             this.username = ''
         },
         outputFULLname() {
+            console.log("================")
             this.username = this.username + "firibu";
         },
         addNumber(event) {
-            console.log(event)
             this.addValue = event.target.value;
         },
 
@@ -107,6 +107,7 @@ const events = new Vue({
             this.counter += Number(this.addValue)
         },
         removeBtn() {
+            console.log("numbrt results")
             this.counter -= Number(this.addValue)
         }
     }
@@ -143,10 +144,12 @@ const userDataForm = new Vue({
         submitUserData(event) {
             this.name = event.target.elements.name.value
             this.userpwd = event.target.elements.password.value
-            alert(this.name + ':::::::::::' + this.userpwd)
+            // console.log(this.name + ':::::::::::' + this.userpwd)
         },
         submitOnShift(event) {
-            alert("shit key called", event.key)
+            console.log(document.querySelector(".userdata").elements.name.value)
+            console.log(document.querySelector(".userdata").elements.password.value)
+            console.log(event.target)
         }
     }
 })

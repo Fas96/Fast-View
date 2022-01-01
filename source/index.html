@@ -41,7 +41,7 @@
                 <hr>
                 <button v-on:click="addBtn()">+</button>
                 <button v-on:click="removeBtn()">-</button>
-                <p>Number  <input type="number" v-on:input="addNumber($event)"></p>
+                <p>Number  <input type="number"    v-on:input="addNumber($event)"></p>
 <!--                <p v-once>Result: {{counter}}</p>-->
                 <p >Result: {{counter}}</p>
             </section>
@@ -49,7 +49,7 @@
 
         <div id="userForm">
             <section id="userDataForm">
-                <form @submit.prevent="submitUserData" @keydown.shift="submitOnShift">
+                <form @submit.prevent="submitUserData" class="userdata" @keydown.enter="submitOnShift">
                     <input type="text" id="name">
                     <input type="password" id="password" autocomplete="on">
                     <button>Sign up</button>
